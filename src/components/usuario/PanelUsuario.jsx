@@ -22,8 +22,8 @@ const PanelUsuario = () => {
 
   return (
     <div className="panel-container">
-      <h2>Panel de Usuario - Órdenes</h2>
-      <table className="ordenes-table">
+      <h2 className="panel-title">Panel de Usuario - Órdenes</h2>
+      <table className="panel-table">
         <thead>
           <tr>
             <th>ID Orden</th>
@@ -35,15 +35,13 @@ const PanelUsuario = () => {
         </thead>
         <tbody>
           {ordenes.map((orden) => (
-            <tr key={orden.id}>
+            <tr key={orden.id} className={orden.estado === "Enviado" ? "estado-enviado" : "estado-pendiente"}>
               <td>{orden.id}</td>
               <td>{orden.fecha}</td>
               <td>{orden.estado}</td>
               <td>${orden.total}</td>
               <td>
-                <Link to={`/orden/${orden.id}`} className="link-btn">
-                  Ver detalle
-                </Link>
+                <Link to={`/orden/${orden.id}`} className="panel-link">Ver detalle</Link>
               </td>
             </tr>
           ))}
@@ -58,7 +56,7 @@ const PanelUsuario = () => {
         >
           Anterior
         </button>
-        <span>
+        <span className="pagination-span">
           Página {paginaActual} de {totalPaginas}
         </span>
         <button

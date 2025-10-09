@@ -22,27 +22,29 @@ const Login = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit} className="form">
+    <div className="login-container">
+      <h2 className="login-title">Iniciar Sesión</h2>
+      <form onSubmit={handleSubmit} className="login-form">
         <label>Email</label>
         <input
+          className="login-input"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="input-field"
+          placeholder="usuario@correo.com"
         />
         <label>Contraseña</label>
         <input
+          className="login-input"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="input-field"
+          placeholder="Escribe tu contraseña"
         />
-        {error && <p className="error-msg">{error}</p>}
-        <button type="submit" className="btn-primary">Entrar</button>
+        {error && <p className="login-error">{error}</p>}
+        <button type="submit" className="login-btn">Entrar</button>
       </form>
     </div>
   );

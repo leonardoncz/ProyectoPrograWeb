@@ -33,38 +33,41 @@ const Registro = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2>Registro</h2>
-      <form onSubmit={handleSubmit} className="form">
+    <div className="registro-container">
+      <h2 className="registro-title">Registro</h2>
+      <form onSubmit={handleSubmit} className="registro-form">
         <label>Email</label>
         <input
+          className="registro-input"
           type="email"
           name="email"
           value={form.email}
           onChange={handleChange}
           required
-          className="input-field"
+          placeholder="usuario@correo.com"
         />
         <label>Contraseña</label>
         <input
+          className="registro-input"
           type="password"
           name="password"
           value={form.password}
           onChange={handleChange}
           required
-          className="input-field"
+          placeholder="Al menos 6 caracteres"
         />
         <label>Confirmar Contraseña</label>
         <input
+          className="registro-input"
           type="password"
           name="confirmarPassword"
           value={form.confirmarPassword}
           onChange={handleChange}
           required
-          className="input-field"
+          placeholder="Repite la contraseña"
         />
-        {error && <p className="error-msg">{error}</p>}
-        <button type="submit" className="btn-primary">Registrarse</button>
+        {error && <p className="registro-error">{error}</p>}
+        <button type="submit" className="registro-btn">Registrarse</button>
       </form>
     </div>
   );
