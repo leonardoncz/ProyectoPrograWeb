@@ -34,28 +34,30 @@ const DetalleOrden = () => {
     }
   };
 
-  if (!orden) return <p>Cargando orden...</p>;
+  if (!orden) return <p className="detalle-loading">Cargando orden...</p>;
 
   return (
     <div className="detalle-container">
-      <h2>Detalle de Orden #{orden.id}</h2>
+      <h2 className="detalle-title">Detalle de Orden #{orden.id}</h2>
       <p><strong>Fecha:</strong> {orden.fecha}</p>
       <p><strong>Estado:</strong> {orden.estado}</p>
       <p><strong>Total:</strong> ${orden.total}</p>
 
-      <h3>Productos</h3>
-      <ul>
+      <h3 className="detalle-subtitle">Productos</h3>
+      <ul className="detalle-productos">
         {orden.productos.map((prod, idx) => (
-          <li key={idx}>
+          <li key={idx} className="detalle-producto">
             {prod.nombre} - Cantidad: {prod.cantidad} - Precio unitario: ${prod.precio}
           </li>
         ))}
       </ul>
 
-      {error && <p className="error-msg">{error}</p>}
+      {error && <p className="detalle-error">{error}</p>}
 
       {orden.estado !== "Cancelada" && (
-        <button onClick={handleCancelar} className="btn-primary">Cancelar Orden</button>
+        <button onClick={handleCancelar} className="btn-primary detalle-btn">
+          Cancelar Orden
+        </button>
       )}
     </div>
   );

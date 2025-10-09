@@ -19,20 +19,21 @@ const RecuperarContraseña = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2>Recuperar Contraseña</h2>
-      <form onSubmit={handleSubmit} className="form">
+    <div className="recuperar-container">
+      <h2 className="recuperar-title">Recuperar Contraseña</h2>
+      <form onSubmit={handleSubmit} className="recuperar-form">
         <label>Email registrado</label>
         <input
+          className="recuperar-input"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="input-field"
+          placeholder="usuario@correo.com"
         />
-        {error && <p className="error-msg">{error}</p>}
-        {mensaje && <p className="success-msg">{mensaje}</p>}
-        <button type="submit" className="btn-primary">Enviar enlace de recuperación</button>
+        {error && <p className="recuperar-error">{error}</p>}
+        {mensaje && <p className="recuperar-success">{mensaje}</p>}
+        <button type="submit" className="recuperar-btn">Enviar enlace de recuperación</button>
       </form>
     </div>
   );

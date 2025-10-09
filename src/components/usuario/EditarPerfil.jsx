@@ -49,54 +49,59 @@ const EditarPerfil = () => {
   };
 
   return (
-    <div className="form-container">
-      <h2>Editar Perfil</h2>
-      <form onSubmit={handleSubmit} className="form">
+    <div className="editar-container">
+      <h2 className="editar-title">Editar Perfil</h2>
+      <form onSubmit={handleSubmit} className="editar-form">
         <label>Nombre</label>
         <input
+          className="editar-input"
           type="text"
           name="nombre"
           value={form.nombre}
           onChange={handleChange}
           required
-          className="input-field"
+          placeholder="Tu nombre"
         />
         <label>Email</label>
         <input
+          className="editar-input"
           type="email"
           name="email"
           value={form.email}
           onChange={handleChange}
           required
-          className="input-field"
+          placeholder="usuario@correo.com"
         />
         <label>Contraseña Actual</label>
         <input
+          className="editar-input"
           type="password"
           name="passwordActual"
           value={form.passwordActual}
           onChange={handleChange}
-          className="input-field"
+          placeholder="Tu contraseña actual"
         />
         <label>Nueva Contraseña</label>
         <input
+          className="editar-input"
           type="password"
           name="nuevaPassword"
           value={form.nuevaPassword}
           onChange={handleChange}
-          className="input-field"
+          placeholder="Al menos 6 caracteres"
         />
         <label>Confirmar Nueva Contraseña</label>
         <input
+          className="editar-input"
           type="password"
           name="confirmarNuevaPassword"
           value={form.confirmarNuevaPassword}
           onChange={handleChange}
-          className="input-field"
+          placeholder="Repite la nueva contraseña"
         />
-        {error && <p className="error-msg">{error}</p>}
-        {mensaje && <p className="success-msg">{mensaje}</p>}
-        <button type="submit" className="btn-primary">Actualizar Perfil</button>
+        {error && <p className="editar-error">{error}</p>}
+        {mensaje && <p className="editar-success">{mensaje}</p>}
+        <button type="submit" className="editar-btn">Actualizar Perfil</button>
       </form>
     </div>
   );
