@@ -7,6 +7,7 @@ import PanelUsuario from './components/usuario/PanelUsuario';
 import DetalleOrden from './components/usuario/DetalleOrden';
 import EditarPerfil from './components/usuario/EditarPerfil';
 import './App.css';
+
 function App() {
   return (
     <Router>
