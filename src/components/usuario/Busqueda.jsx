@@ -1,5 +1,5 @@
 import { useState } from "react";
-import productos from "../data/productos"; 
+import { todosAnimales } from "../data/productos"; 
 import { Link } from "react-router-dom";
 
 export default function Busqueda() {
@@ -15,38 +15,40 @@ export default function Busqueda() {
       return;
     }
 
-    const filtrados = productos.filter((prod) =>
-      prod.nombre.toLowerCase().includes(texto)
+    const filtrados = todosAnimales.filter((animal) =>
+      animal.name.toLowerCase().includes(texto) ||
+      animal.type.toLowerCase().includes(texto) ||
+      animal.breed.toLowerCase().includes(texto)
     );
     setResultados(filtrados);
   };
 
   return (
     <div className="busqueda-container">
-      <h2>Buscar Productos</h2>
+      <h2>Buscar Mascotas</h2>
 
       <input
         type="text"
         value={busqueda}
         onChange={handleBuscar}
-        placeholder="Escribe el nombre del producto..."
+        placeholder="Busca por nombre, tipo o raza..."
         className="busqueda-input"
       />
 
       <div className="resultados-lista">
         {resultados.length === 0 && busqueda !== "" && (
-          <p>No se encontraron productos.</p>
+          <p>No se encontraron mascotas.</p>
         )}
 
-        {resultados.map((producto) => (
-          <div key={producto.id} className="producto-item">
-            <img src={producto.imagen} alt={producto.nombre} width={100} />
-            <h3>{producto.nombre}</h3>
-            <p>Precio: ${producto.precio}</p>
-             
-              <button>Añadir al carrito</button>
-              
-          </div>
+        {resultados.map((animal) => (
+          <Link to={`/animal/${animal.id}`} key={animal.id} className="producto-item">
+            <img src={animal.image} alt={animal.name} width={100} />
+            <div>
+              <h3>{animal.name}</h3>
+              <p>{animal.breed}</p>
+              <button>Ver Detalles</button>
+            </div>
+          </Link>
         ))}
       </div>
     </div>
