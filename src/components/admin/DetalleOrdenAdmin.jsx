@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { mockOrdenesAdmin } from '../../data/ordenes.json';
+import { useParams, useNavigate, Link } from "react-router-dom"; // 1. Importa 'Link'
+import mockOrdenesAdmin from '../../data/ordenes.json';
 
 const DetalleOrdenAdmin = () => {
     const { id } = useParams();
@@ -9,7 +9,6 @@ const DetalleOrdenAdmin = () => {
 
     useEffect(() => {
         const ordenEncontrada = mockOrdenesAdmin.find(o => o.id === parseInt(id));
-        // Simulo una carga más detallada
         if (ordenEncontrada) {
             setOrden({
                 ...ordenEncontrada,
@@ -54,9 +53,15 @@ const DetalleOrdenAdmin = () => {
                     Cancelar Orden
                 </button>
             )}
+
+            {/* 2. AÑADE ESTE ENLACE AQUÍ 👇 */}
+            <div className="admin-back-link-container">
+                <Link to="/admin/ordenes" className="admin-link-back">
+                    ← Volver al listado de órdenes
+                </Link>
+            </div>
         </div>
     );
 };
 
 export default DetalleOrdenAdmin;
-

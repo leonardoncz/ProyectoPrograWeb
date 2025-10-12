@@ -400,4 +400,25 @@ h2 {
     background: #f4f6f8;
 }
 
+/* Pega esto al final de tu sección de ADMIN Styles en App.css */
+
+.admin-link-back {
+    display: inline-block;
+    margin-top: 25px;
+    font-weight: bold;
+    color: #3d5a80;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.admin-link-back:hover {
+    color: #2962ff;
+    text-decoration: underline;
+}
+
+.admin-back-link-container {
+    text-align: center;
+    width: 100%;
+}
+
 
