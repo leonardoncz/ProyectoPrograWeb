@@ -1,0 +1,125 @@
+/* Estilos base para la página de autenticación */
+.auth-page-wrapper {
+  width: 100%;
+  /* Clave para el centrado: ocupa al menos toda la altura de la ventana menos el header */
+  min-height: calc(100vh - 80px); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  background-color: #f8f9fa; /* Un fondo suave y limpio */
+  background-image:
+    radial-gradient(circle at 5% 15%, hsla(196, 68%, 85%, 0.3) 0%, transparent 40%),
+    radial-gradient(circle at 95% 85%, hsla(140, 68%, 85%, 0.3) 0%, transparent 40%);
+}
+
+/* El contenedor del formulario con la tarjeta */
+.auth-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 30px 40px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  border: 1px solid #e9ecef;
+}
+
+.auth-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 10px;
+}
+
+.auth-subtitle {
+  color: #6c757d;
+  margin-bottom: 30px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.auth-form label {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.auth-input {
+  padding: 12px 15px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.auth-button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  color: #fff;
+}
+
+.auth-button:hover {
+  transform: translateY(-2px);
+}
+
+.login-btn {
+  background-color: #007bff;
+}
+.login-btn:hover {
+  background-color: #0056b3;
+}
+
+.register-btn {
+  background-color: #28a745;
+}
+.register-btn:hover {
+  background-color: #218838;
+}
+
+
+.auth-links {
+  margin-top: 25px;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.auth-links a {
+  color: #007bff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.auth-error {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: 500;
+}
+

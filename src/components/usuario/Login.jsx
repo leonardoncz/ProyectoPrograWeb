@@ -1,56 +1,66 @@
-// src/components/usuario/Login.jsx
 import { useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+// CORRECCIÓN: Se usan rutas relativas para asegurar la compatibilidad.
+import { useAuth } from '../../context/AuthContext'; 
+import './AuthForms.css';
 
 const Login = () => {
-  const [email, setEmail] = useState("user@test.com"); // Pre-llenado para pruebas
-  const [password, setPassword] = useState("123456"); // Pre-llenado para pruebas
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const { login } = useAuth();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/panel"; // A dónde ir después del login
+  const { login } = useAuth(); // Usar la función de login del context
+  const navigate = useNavigate(); // Hook para redirigir
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError(""); // Limpiar errores previos
+
     try {
+      // Intentar iniciar sesión con los datos del formulario
       await login(email, password);
-      navigate(from, { replace: true });
+      navigate("/"); // Redirigir a la página principal si el login es exitoso
     } catch (err) {
-      setError("Credenciales incorrectas. Inténtalo de nuevo.");
+      // Capturar y mostrar el error del context (ej. credenciales incorrectas)
+      setError(err.message);
     }
   };
 
   return (
-    <div className="login-container">
-      <h2 className="login-title">Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label>Email</label>
-        <input
-          className="login-input"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          placeholder="usuario@correo.com"
-        />
-        <label>Contraseña</label>
-        <input
-          className="login-input"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          placeholder="Escribe tu contraseña"
-        />
-        {error && <p className="login-error">{error}</p>}
-        <button type="submit" className="login-btn">Entrar</button>
-      </form>
+    <div className="auth-page-wrapper">
+      <div className="auth-container">
+        <h2 className="auth-title">¡Hola de nuevo!</h2>
+        <p className="auth-subtitle">Ingresa para encontrar a tu próximo amigo.</p>
+        <form onSubmit={handleSubmit} className="auth-form">
+          <label>Email</label>
+          <input
+            className="auth-input"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="usuario@correo.com"
+          />
+          <label>Contraseña</label>
+          <input
+            className="auth-input"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="Tu contraseña"
+          />
+          {error && <p className="auth-error">{error}</p>}
+          {/* Se añade la clase correcta para el botón de login */ }
+          <button type="submit" className="auth-button login-btn">Entrar</button>
+        </form>
+        <div className="auth-links">
+          <p><Link to="/recuperar-contraseña">¿Olvidaste tu contraseña?</Link></p>
+          <p>¿No tienes una cuenta? <Link to="/registro">Regístrate</Link></p>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default Login;
+
