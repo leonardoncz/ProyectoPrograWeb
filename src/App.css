@@ -66,6 +66,15 @@ h2 {
   font-weight: bold;
 }
 
+.estado-cancelada {
+  background-color: #f8d7da; /* Un rojo suave */
+  color: #721c24; /* Un rojo oscuro */
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+  text-decoration: line-through; /* Tachado para mayor claridad */
+}
+
 .panel-link {
   color: #007bff;
   text-decoration: none;
