@@ -1,0 +1,9 @@
+.checkout-container { display: flex; justify-content: center; padding: 40px; }
+.checkout-form { width: 100%; max-width: 500px; }
+.checkout-form input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
+.pago-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+.pago-tabs button { padding: 10px 20px; border: 1px solid #ccc; background: #f0f0f0; cursor: pointer; }
+.pago-tabs button.activo { background: #007bff; color: white; border-color: #007bff; }
+.pago-detalles { border: 1px solid #eee; padding: 20px; border-radius: 4px; }
+.qr-code { text-align: center; }
+.pagar-btn { width: 100%; padding: 15px; background-color: #28a745; color: white; border: none; font-size: 1.2rem; cursor: pointer; border-radius: 5px; margin-top: 20px; }
