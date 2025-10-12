@@ -1,59 +1,84 @@
-// src/context/AuthContext.jsx
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
-// 1. Crear el contexto
-const AuthContext = createContext();
+// Crear el contexto
+export const AuthContext = createContext();
 
-// 2. Crear un hook personalizado para usar el contexto más fácilmente
+// Hook personalizado para usar el contexto
 export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-// 3. Crear el proveedor del contexto
+// Proveedor del contexto
 export const AuthProvider = ({ children }) => {
-  const [usuario, setUsuario] = useState(null); // null si no hay usuario, objeto de usuario si está logueado
+  const [usuario, setUsuario] = useState(null);
+  const [usuariosRegistrados, setUsuariosRegistrados] = useState([]);
 
-  // Función para simular el inicio de sesión
-  const login = (email, password) => {
-    // En un proyecto real, aquí harías una llamada a tu API
-    console.log("Intentando iniciar sesión con:", email, password);
-    // Simulación: Si el email es "user@test.com" y pass "123456", el login es exitoso
-    if (email === "user@test.com" && password === "123456") {
-      const usuarioSimulado = {
-        id: '1',
-        nombre: 'Usuario de Prueba',
-        email: email,
-        // Aquí irían más datos del usuario: rol, etc.
-      };
-      setUsuario(usuarioSimulado);
-      return usuarioSimulado;
-    }
-    // Si falla, podrías lanzar un error
-    throw new Error("Credenciales inválidas");
-  };
+  // Cargar usuarios desde localStorage al iniciar la app
+  useEffect(() => {
+    const usuariosGuardados = JSON.parse(localStorage.getItem('usuarios')) || [];
+    setUsuariosRegistrados(usuariosGuardados);
+  }, []);
 
   // Función para registrar un nuevo usuario
   const registro = async (datosUsuario) => {
-    // En un proyecto real, aquí harías una llamada POST a tu API para crear el usuario
-    console.log("Registrando nuevo usuario:", datosUsuario);
-    // Simulación: asumimos que el registro siempre es exitoso
-    // y devolvemos los datos del nuevo usuario.
-    // La API real devolvería el usuario creado con un ID.
-    return { id: Date.now(), ...datosUsuario };
+    const emailExistente = usuariosRegistrados.find(u => u.email === datosUsuario.email);
+    if (emailExistente) {
+      throw new Error("Este correo electrónico ya está registrado.");
+    }
+    const nuevosUsuarios = [...usuariosRegistrados, datosUsuario];
+    localStorage.setItem('usuarios', JSON.stringify(nuevosUsuarios));
+    setUsuariosRegistrados(nuevosUsuarios);
+  };
+
+  // Función para iniciar sesión
+  const login = async (email, password) => {
+    const usuarioEncontrado = usuariosRegistrados.find(u => u.email === email);
+    if (!usuarioEncontrado) {
+      throw new Error("El correo electrónico no está registrado.");
+    }
+    if (usuarioEncontrado.password !== password) {
+      throw new Error("La contraseña es incorrecta.");
+    }
+    setUsuario(usuarioEncontrado);
   };
 
   // Función para cerrar sesión
   const logout = () => {
     setUsuario(null);
-    // Aquí también podrías limpiar tokens, etc.
   };
+
+  // Función para recuperación de contraseña
+  const recuperarContraseña = async (email, nuevaPassword) => {
+    const emailExistente = usuariosRegistrados.find(u => u.email === email);
+    if (!emailExistente) {
+     throw new Error("El correo electrónico no está registrado.");
+    }
+    
+    // Si la contraseña es 'temp_password_check', solo estamos validando, no actualizamos
+    if (nuevaPassword === 'temp_password_check') {
+        return; // Éxito, el correo existe
+    }
+
+    const usuariosActualizados = usuariosRegistrados.map(u => {
+      if (u.email === email) {
+        return { ...u, password: nuevaPassword }; // Actualiza la contraseña
+      }
+      return u;
+    });
+
+    localStorage.setItem('usuarios', JSON.stringify(usuariosActualizados));
+    setUsuariosRegistrados(usuariosActualizados);
+  };
+
 
   const value = {
     usuario,
     login,
     logout,
     registro,
+    recuperarContraseña,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
