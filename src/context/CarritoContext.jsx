@@ -39,39 +39,30 @@ export function CarritoProvider({ children }) {
     });
   };
 
-  const modificarCantidad = (productoId, nuevaCantidad) => {
-    if (nuevaCantidad <= 0) {
-      eliminarDelCarrito(productoId);
-    } else {
-      setItems(prevItems =>
-        prevItems.map(item =>
-          item.id === productoId ? { ...item, quantity: nuevaCantidad } : item
-        )
-      );
-    }
-  };
-
-  const eliminarDelCarrito = (productoId) => {
-    setItems(prevItems => prevItems.filter(item => item.id !== productoId));
-  };
-
   const limpiarCarrito = () => {
     setItems([]);
   };
   
-  // --- Función de Crear Órdenes CORREGIDA ---
-  // AHORA RECIBE LOS PRODUCTOS DIRECTAMENTE COMO ARGUMENTO
+  // --- Funciones de Órdenes ---
   const crearOrden = (usuarioId, total, productosDeLaOrden) => {
     const nuevaOrden = {
-      id: Date.now(), // ID único basado en la fecha actual
+      id: Date.now(),
       usuarioId: usuarioId,
       fecha: new Date().toLocaleDateString(),
       estado: "Pendiente",
       total: total.toFixed(2),
-      productos: productosDeLaOrden, // Usamos los productos que nos pasaron
+      productos: productosDeLaOrden,
     };
-    
     setOrdenes(prevOrdenes => [...prevOrdenes, nuevaOrden]);
+  };
+
+  // --- ¡NUEVA FUNCIÓN PARA CANCELAR UNA ORDEN! ---
+  const cancelarOrden = (ordenId) => {
+    setOrdenes(prevOrdenes =>
+      prevOrdenes.map(orden =>
+        orden.id === ordenId ? { ...orden, estado: 'Cancelada' } : orden
+      )
+    );
   };
 
   return (
@@ -79,10 +70,9 @@ export function CarritoProvider({ children }) {
       items,
       ordenes,
       agregarAlCarrito,
-      modificarCantidad,
-      eliminarDelCarrito,
       limpiarCarrito,
       crearOrden,
+      cancelarOrden, // Exponemos la nueva función
     }}>
       {children}
     </CarritoContext.Provider>
