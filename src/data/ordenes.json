@@ -2,41 +2,99 @@
   {
     "id": 500,
     "fecha": "1/10/2025",
-    "usuario": {
-      "nombre": "Cliente 1",
-      "apellido": "Demo 1"
-    },
+    "usuario": { "nombre": "Cliente 1", "apellido": "Demo 1" },
     "estado": "Cancelada",
     "total": "189.56"
   },
   {
     "id": 501,
     "fecha": "1/10/2025",
-    "usuario": {
-      "nombre": "Cliente 2",
-      "apellido": "Demo 2"
-    },
+    "usuario": { "nombre": "Cliente 2", "apellido": "Demo 2" },
     "estado": "Pendiente",
     "total": "45.12"
   },
   {
     "id": 502,
     "fecha": "2/10/2025",
-    "usuario": {
-      "nombre": "Cliente 3",
-      "apellido": "Demo 3"
-    },
+    "usuario": { "nombre": "Cliente 3", "apellido": "Demo 3" },
     "estado": "Pendiente",
     "total": "210.00"
   },
   {
     "id": 503,
     "fecha": "2/10/2025",
-    "usuario": {
-      "nombre": "Cliente 4",
-      "apellido": "Demo 4"
-    },
+    "usuario": { "nombre": "Cliente 4", "apellido": "Demo 4" },
     "estado": "Enviado",
     "total": "88.70"
+  },
+  {
+    "id": 504,
+    "fecha": "10/9/2025",
+    "usuario": { "nombre": "Cliente 5", "apellido": "Demo 5" },
+    "estado": "Completada",
+    "total": "132.45"
+  },
+  {
+    "id": 505,
+    "fecha": "14/9/2025",
+    "usuario": { "nombre": "Cliente 6", "apellido": "Demo 6" },
+    "estado": "Pendiente",
+    "total": "76.90"
+  },
+  {
+    "id": 506,
+    "fecha": "21/9/2025",
+    "usuario": { "nombre": "Cliente 7", "apellido": "Demo 7" },
+    "estado": "Enviado",
+    "total": "244.30"
+  },
+  {
+    "id": 507,
+    "fecha": "25/9/2025",
+    "usuario": { "nombre": "Cliente 8", "apellido": "Demo 8" },
+    "estado": "Cancelada",
+    "total": "59.80"
+  },
+  {
+    "id": 508,
+    "fecha": "28/9/2025",
+    "usuario": { "nombre": "Cliente 9", "apellido": "Demo 9" },
+    "estado": "Completada",
+    "total": "188.10"
+  },
+  {
+    "id": 509,
+    "fecha": "4/10/2025",
+    "usuario": { "nombre": "Cliente 10", "apellido": "Demo 10" },
+    "estado": "Pendiente",
+    "total": "94.25"
+  },
+  {
+    "id": 510,
+    "fecha": "6/10/2025",
+    "usuario": { "nombre": "Cliente 11", "apellido": "Demo 11" },
+    "estado": "Completada",
+    "total": "173.80"
+  },
+  {
+    "id": 511,
+    "fecha": "8/10/2025",
+    "usuario": { "nombre": "Cliente 12", "apellido": "Demo 12" },
+    "estado": "Enviado",
+    "total": "67.45"
+  },
+  {
+    "id": 512,
+    "fecha": "10/10/2025",
+    "usuario": { "nombre": "Cliente 13", "apellido": "Demo 13" },
+    "estado": "Completada",
+    "total": "299.99"
+  },
+  {
+    "id": 513,
+    "fecha": "11/10/2025",
+    "usuario": { "nombre": "Cliente 14", "apellido": "Demo 14" },
+    "estado": "Pendiente",
+    "total": "120.55"
   }
 ]

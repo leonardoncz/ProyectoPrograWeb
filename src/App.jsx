@@ -21,6 +21,10 @@ import GestionUsuarios from "./components/admin/GestionUsuarios";
 import RutaProtegida from "./components/RutaProtegida";
 import Header from "./components/layout/Header";
 
+import Dashboard from "./components/admin/DashboardAdmin";
+import GestionProductos from "./components/admin/GestionProductos";
+import GestionCategorias from "./components/admin/GestionCategorias";
+
 function App() {
   return (
     <AuthProvider>
@@ -40,6 +44,10 @@ function App() {
               <Route path="/detalle-orden-admin" element={<DetalleUsuarioAdmin />} />
               <Route path="/gestion-ordenes" element={<GestionOrdenes />} />
               <Route path="/gestion-usuarios" element={<GestionUsuarios />} />
+
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/gestionproductos" element={<GestionProductos />} />
+              <Route path="/gestioncategorias" element={<GestionCategorias />} />
             
 
 

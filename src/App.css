@@ -321,3 +321,44 @@ h2 {
 
 /* Pega esto en tu archivo CSS principal, como App.css o index.css */
 
+.dashboard-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.dashboard-card {
+  flex: 1;
+  min-width: 200px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.dashboard-card h3 {
+  color: #444;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-card p {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #2d7dd2;
+}
+
+.dashboard-chart {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.dashboard-no-data {
+  text-align: center;
+  color: #666;
+  margin: 2rem 0;
+}
