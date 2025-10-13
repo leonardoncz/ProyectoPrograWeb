@@ -25,8 +25,9 @@ import RutaProtegida from "./components/RutaProtegida";
 import Header from "./components/layout/Header";
 import GestionMascotas from "./components/admin/GestionMascotas";
 import FormularioMascota from "./components/admin/FormularioMascotas";
-
-
+import Dashboard from "./components/admin/DashboardAdmin";
+import GestionProductos from "./components/admin/GestionProductos";
+import GestionCategorias from "./components/admin/GestionCategorias";
 
 function App() {
   return (
@@ -57,6 +58,10 @@ function App() {
                     <Route path="/admin/mascotas" element={<GestionMascotas />} />
                     <Route path="/admin/mascotas/agregar" element={<FormularioMascota />} />
                     <Route path="/admin/mascotas/editar/:id" element={<FormularioMascota />} />
+
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/gestionproductos" element={<GestionProductos />} />
+                    <Route path="/gestioncategorias" element={<GestionCategorias />} />
 
                     {/* --- Rutas Privadas (requieren inicio de sesión) --- */}
                     <Route 
