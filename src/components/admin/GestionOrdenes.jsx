@@ -1,18 +1,25 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import mockOrdenesAdmin from '../../data/ordenes.json'; // Suponiendo que creaste el archivo de mocks
+import { useOrdenes } from '../../context/OrdenesContext';
+import './Admin.css';
 
 const GestionOrdenes = () => {
-  const [ordenes] = useState(mockOrdenesAdmin);
+  const { ordenes } = useOrdenes();
   const [filtro, setFiltro] = useState("");
   const [paginaActual, setPaginaActual] = useState(1);
   const ITEMS_POR_PAGINA = 10;
 
-  const ordenesFiltradas = ordenes.filter(o =>
-    o.usuario.nombre.toLowerCase().includes(filtro.toLowerCase()) ||
-    o.usuario.apellido.toLowerCase().includes(filtro.toLowerCase()) ||
-    o.id.toString().includes(filtro)
-  );
+  const ordenesFiltradas = ordenes.filter(o => {
+    // CORRECCIÓN: Se añade una guarda (o.productos || [])
+    // Esto asegura que si 'o.productos' es undefined, se usará un array vacío, evitando el error.
+    const mascotasTexto = (o.productos || []).map(p => `${p.name} ${p.breed}`).join(' ');
+
+    return (
+      (o.usuario?.nombre || '').toLowerCase().includes(filtro.toLowerCase()) ||
+      mascotasTexto.toLowerCase().includes(filtro.toLowerCase()) ||
+      o.id.toString().includes(filtro)
+    );
+  });
 
   const totalPaginas = Math.ceil(ordenesFiltradas.length / ITEMS_POR_PAGINA);
   const ordenesPaginadas = ordenesFiltradas.slice(
@@ -26,7 +33,7 @@ const GestionOrdenes = () => {
        <div className="admin-filter-bar">
         <input
           type="text"
-          placeholder="Filtrar por ID de orden o nombre/apellido de cliente..."
+          placeholder="Filtrar por ID, cliente o mascota..."
           value={filtro}
           onChange={(e) => { setFiltro(e.target.value); setPaginaActual(1); }}
           className="admin-filter-input"
@@ -38,6 +45,7 @@ const GestionOrdenes = () => {
             <th>ID Orden</th>
             <th>Fecha</th>
             <th>Cliente</th>
+            <th>Mascotas</th>
             <th>Estado</th>
             <th>Total</th>
             <th>Acciones</th>
@@ -48,7 +56,9 @@ const GestionOrdenes = () => {
             <tr key={orden.id}>
               <td>{orden.id}</td>
               <td>{orden.fecha}</td>
-              <td>{`${orden.usuario.nombre} ${orden.usuario.apellido}`}</td>
+              <td>{orden.usuario?.nombre || 'N/A'}</td>
+              {/* CORRECCIÓN: Se añade la misma guarda aquí por seguridad */}
+              <td>{(orden.productos || []).map(p => p.name).join(', ')}</td>
               <td>{orden.estado}</td>
               <td>${orden.total}</td>
               <td>

@@ -1,6 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CarritoProvider } from "./context/CarritoContext";
 import { AuthProvider } from "./context/AuthContext";
+import MascotasProvider from "./context/MascotasContext"; 
+import { UsuariosProvider } from "./context/UsuariosContext";
+import { OrdenesProvider } from "./context/OrdenesContext";
 
 // Componentes y Páginas
 import Home from "./components/Home";
@@ -20,68 +23,84 @@ import GestionOrdenes from "./components/admin/GestionOrdenes";
 import GestionUsuarios from "./components/admin/GestionUsuarios";
 import RutaProtegida from "./components/RutaProtegida";
 import Header from "./components/layout/Header";
+import GestionMascotas from "./components/admin/GestionMascotas";
+import FormularioMascota from "./components/admin/FormularioMascotas";
+
+
 
 function App() {
   return (
     <AuthProvider>
-      <CarritoProvider>
-        <Router>
-          <Header />
-          <main>
-            <Routes>
-              {/* --- Rutas Públicas --- */}
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/registro" element={<Registro />} />
-              <Route path="/recuperar-contraseña" element={<RecuperarContraseña />} />
-              <Route path="/busqueda" element={<Busqueda />} />
-              <Route path="/carrito" element={<CarritoPage />} />
-              <Route path="/confirmacion" element={<ConfirmacionPage />} />
-              <Route path="/detalle-orden-admin" element={<DetalleOrdenAdmin />} />
-              <Route path="/detalle-usuario-admin" element={<DetalleUsuarioAdmin />} />
-              <Route path="/gestion-ordenes" element={<GestionOrdenes />} />
-              <Route path="/gestion-usuarios" element={<GestionUsuarios />} />
-            
+      <UsuariosProvider>
+        <MascotasProvider>
+          <OrdenesProvider>
+            <CarritoProvider>
+              <Router>
+                <Header/>
+                <main>
+                  <Routes>
+                    {/* --- Rutas Públicas --- */}
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/registro" element={<Registro />} />
+                    <Route path="/recuperar-contraseña" element={<RecuperarContraseña />} />
+                    <Route path="/busqueda" element={<Busqueda />} />
+                    <Route path="/carrito" element={<CarritoPage />} />
+                    <Route path="/confirmacion" element={<ConfirmacionPage />} />
 
+                    {/* Rutas de Administrador */}
+                    <Route path="/admin/usuarios" element={<GestionUsuarios />} />
+                    <Route path="/admin/usuario/:id" element={<DetalleUsuarioAdmin />} />
+                    <Route path="/admin/ordenes" element={<GestionOrdenes />} />
+                    <Route path="/admin/orden/:id" element={<DetalleOrdenAdmin />} />
 
-              {/* --- Rutas Privadas (requieren inicio de sesión) --- */}
-              <Route 
-                path="/perfil/editar" 
-                element={
-                  <RutaProtegida>
-                    <EditarPerfil />
-                  </RutaProtegida>
-                } 
-              />
-               <Route 
-                path="/panel" 
-                element={
-                  <RutaProtegida><PanelUsuario /></RutaProtegida>
-                } 
-              />
-              <Route 
-                path="/orden/:id" 
-                element={
-                  <RutaProtegida>
-                    <DetalleOrden />
-                  </RutaProtegida>
-                } 
-              />
-              <Route 
-                path="/checkout" 
-                element={
-                  <RutaProtegida>
-                    <CheckoutPage />
-                  </RutaProtegida>
-                } 
-              />
-              
-              {/* Aquí puedes añadir más rutas protegidas si es necesario */}
+                    <Route path="/admin/mascotas" element={<GestionMascotas />} />
+                    <Route path="/admin/mascotas/agregar" element={<FormularioMascota />} />
+                    <Route path="/admin/mascotas/editar/:id" element={<FormularioMascota />} />
 
-            </Routes>
-          </main>
-        </Router>
-      </CarritoProvider>
+                    {/* --- Rutas Privadas (requieren inicio de sesión) --- */}
+                    <Route 
+                      path="/perfil/editar" 
+                      element={
+                        <RutaProtegida>
+                          <EditarPerfil />
+                        </RutaProtegida>
+                      } 
+                    />
+                     <Route 
+                      path="/panel" 
+                      element={
+                        <RutaProtegida>
+                          <PanelUsuario />
+                        </RutaProtegida>
+                      } 
+                    />
+                    <Route 
+                      path="/orden/:id" 
+                      element={
+                        <RutaProtegida>
+                          <DetalleOrden />
+                        </RutaProtegida>
+                      } 
+                    />
+                    <Route 
+                      path="/checkout" 
+                      element={
+                        <RutaProtegida>
+                          <CheckoutPage />
+                        </RutaProtegida>
+                      } 
+                    />
+
+                    {/* Aquí puedes añadir más rutas protegidas si es necesario */}
+                    
+                  </Routes>
+                </main>
+              </Router>
+            </CarritoProvider>
+          </OrdenesProvider>
+        </MascotasProvider>
+      </UsuariosProvider>
     </AuthProvider>
   );
 }

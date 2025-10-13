@@ -1,63 +1,66 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom"; // 1. Importa 'Link'
-import mockOrdenesAdmin from '../../data/ordenes.json';
+import { useParams, useNavigate, Link } from "react-router-dom";
+// CORRECCIÓN 1: Se importa el hook del contexto en lugar del archivo JSON.
+import { useOrdenes } from '../../context/OrdenesContext';
+import './Admin.css';
 
 const DetalleOrdenAdmin = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    // CORRECCIÓN 2: Se obtiene la lista completa de órdenes desde el contexto.
+    const { ordenes } = useOrdenes();
     const [orden, setOrden] = useState(null);
 
     useEffect(() => {
-        const ordenEncontrada = mockOrdenesAdmin.find(o => o.id === parseInt(id));
+        // CORRECCIÓN 3: Se busca la orden específica dentro de la lista del contexto.
+        const ordenEncontrada = ordenes.find(o => o.id === parseInt(id));
         if (ordenEncontrada) {
             setOrden({
                 ...ordenEncontrada,
-                productos: [
-                    { nombre: "Producto A", cantidad: 2, precio: 15.00 },
-                    { nombre: "Producto B", cantidad: 1, precio: 45.50 },
-                ],
-                direccion: "Av. Siempre Viva 123, Springfield"
+                direccion: "Av. La Mascota Feliz 456, Lima" // Simulación de dato extra
             });
         }
-    }, [id]);
+    }, [id, ordenes]); // Se añade 'ordenes' a las dependencias
 
     const handleCancelar = () => {
+        // En el futuro, aquí llamarías a una función del contexto como 'cancelarOrden(id)'
         if (window.confirm("¿Seguro que quieres cancelar esta orden?")) {
             alert("Orden cancelada (simulado).");
             navigate("/admin/ordenes");
         }
     };
 
-    if (!orden) return <p>Cargando orden...</p>;
+    if (!orden) {
+        return <p>Cargando orden...</p>;
+    }
 
     return (
-        <div className="detalle-container">
-            <h2 className="detalle-title">Detalle de Orden #{orden.id} (Admin)</h2>
-            <p><strong>Cliente:</strong> {orden.usuario.nombre} {orden.usuario.apellido}</p>
+        <div className="admin-container admin-detalle">
+            <h2 className="detalle-title">Detalle de Orden #{orden.id}</h2>
+            <p><strong>Cliente:</strong> {orden.usuario.nombre}</p>
             <p><strong>Fecha:</strong> {orden.fecha}</p>
             <p><strong>Estado:</strong> {orden.estado}</p>
             <p><strong>Dirección de envío:</strong> {orden.direccion}</p>
             <p><strong>Total:</strong> ${orden.total}</p>
 
-            <h3 className="detalle-subtitle">Productos</h3>
-            <ul className="detalle-productos">
-                {orden.productos.map((prod, idx) => (
-                    <li key={idx} className="detalle-producto">
-                        {prod.nombre} (x{prod.cantidad}) - ${prod.precio.toFixed(2)} c/u
-                    </li>
-                ))}
+            <h3 className="detalle-subtitle">Mascotas en esta Orden</h3>
+            <ul className="detalle-productos-lista">
+              {(orden.productos || []).map(mascota => (
+                <li key={mascota.id || mascota.name}>
+                  <strong>{mascota.name}</strong> ({mascota.breed}) - ${mascota.price ? mascota.price.toFixed(2) : '0.00'}
+                </li>
+              ))}
             </ul>
-
-            {orden.estado !== "Cancelada" && (
+            
+            {orden.estado !== "Cancelada" && orden.estado !== "Completada" && (
                  <button onClick={handleCancelar} className="detalle-btn">
                     Cancelar Orden
                 </button>
             )}
-
-            {/* 2. AÑADE ESTE ENLACE AQUÍ 👇 */}
+            
             <div className="admin-back-link-container">
                 <Link to="/admin/ordenes" className="admin-link-back">
-                    ← Volver al listado de órdenes
+                    ← Volver al listado
                 </Link>
             </div>
         </div>

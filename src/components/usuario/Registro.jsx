@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// CORRECCIÓN: Se usan rutas absolutas desde /src para evitar errores de resolución.
-import { useAuth } from '/src/context/AuthContext'; 
-import '/src/components/usuario/AuthForms.css';
+
+import { useAuth } from '../../context/AuthContext'; 
+import './AuthForms.css';
 
 const Registro = () => {
   const [form, setForm] = useState({
@@ -10,6 +10,7 @@ const Registro = () => {
     email: "",
     password: "",
     confirmarPassword: "",
+    pais: "",
   });
   const [error, setError] = useState("");
   const { registro } = useAuth(); 
@@ -32,8 +33,12 @@ const Registro = () => {
     }
 
     try {
-      await registro({ nombre: form.nombre, email: form.email, password: form.password });
-      alert("¡Registro exitoso! Ahora serás redirigido para iniciar sesión.");
+      await registro({ 
+          nombre: form.nombre, 
+          email: form.email, 
+          password: form.password,
+          pais: form.pais
+      });
       navigate("/login"); 
     } catch (err) {
       setError(err.message);
@@ -65,6 +70,16 @@ const Registro = () => {
             onChange={handleChange}
             required
             placeholder="usuario@correo.com"
+          />
+          <label>País</label>
+          <input
+            className="auth-input"
+            type="text"
+            name="pais"
+            value={form.pais}
+            onChange={handleChange}
+            required
+            placeholder="Ej: Perú"
           />
           <label>Contraseña</label>
           <input
