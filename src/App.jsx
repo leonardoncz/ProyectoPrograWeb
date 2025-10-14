@@ -1,13 +1,14 @@
 // src/App.jsx
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
+import AuthProvider from "./context/AuthContext"; // Import sin llaves
 import MascotasProvider from "./context/MascotasContext";
 import { CarritoProvider } from "./context/CarritoContext";
 import { UsuariosProvider } from "./context/UsuariosContext";
 import { OrdenesProvider } from "./context/OrdenesContext";
+import CategoriasProvider from './context/CategoriasContext';
 
-// Componentes y Páginas
+// ... (todas tus otras importaciones de componentes se mantienen igual) ...
 import Header from "./components/layout/Header";
 import Home from "./components/Home";
 import Login from "./components/usuario/Login";
@@ -22,8 +23,6 @@ import ConfirmacionPage from "./components/carrito/ConfirmacionPage";
 import DetalleOrden from "./components/usuario/DetalleOrden";
 import RutaProtegida from "./components/RutaProtegida";
 import DetalleProducto from "./components/DetalleProducto";
-
-// Componentes de Admin
 import DashboardAdmin from "./components/admin/DashboardAdmin";
 import GestionUsuarios from "./components/admin/GestionUsuarios";
 import DetalleUsuarioAdmin from "./components/admin/DetalleUsuarioAdmin";
@@ -31,21 +30,26 @@ import GestionOrdenes from "./components/admin/GestionOrdenes";
 import DetalleOrdenAdmin from "./components/admin/DetalleOrdenAdmin";
 import GestionProductos from "./components/admin/GestionProductos";
 import FormularioProducto from "./components/admin/FormularioProducto";
+import GestionCategorias from "./components/admin/GestionCategorias";
+import FormularioCategoria from "./components/admin/FormularioCategoria";
 
 // Componente para agrupar todos los providers y limpiar App.jsx
 const AppProviders = ({ children }) => {
   return (
-    <AuthProvider>
-      <UsuariosProvider>
+    // CAMBIO CLAVE: UsuariosProvider ahora envuelve a AuthProvider
+    <UsuariosProvider>
+      <AuthProvider>
         <MascotasProvider>
-          <OrdenesProvider>
-            <CarritoProvider>
-              {children}
-            </CarritoProvider>
-          </OrdenesProvider>
+          <CategoriasProvider>
+            <OrdenesProvider>
+             <CarritoProvider>
+                {children}
+              </CarritoProvider>
+           </OrdenesProvider>
+          </CategoriasProvider>
         </MascotasProvider>
-      </UsuariosProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </UsuariosProvider>
   );
 };
 
@@ -74,6 +78,11 @@ function App() {
             <Route path="/admin/mascotas" element={<RutaProtegida><GestionProductos /></RutaProtegida>} />
             <Route path="/admin/mascotas/agregar" element={<RutaProtegida><FormularioProducto /></RutaProtegida>} />
             <Route path="/admin/mascotas/editar/:id" element={<RutaProtegida><FormularioProducto /></RutaProtegida>} />
+            <Route path="/admin/categorias" element={<RutaProtegida><GestionCategorias /></RutaProtegida>} />
+            <Route path="/admin/categorias/agregar" element={<RutaProtegida><FormularioCategoria /></RutaProtegida>} />
+            <Route path="/admin/categorias/editar/:id" element={<RutaProtegida><FormularioCategoria /></RutaProtegida>} />
+
+            
 
             {/* --- Rutas Privadas de Usuario Protegidas --- */}
             <Route path="/perfil/editar" element={<RutaProtegida><EditarPerfil /></RutaProtegida>} />
