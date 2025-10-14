@@ -36,7 +36,6 @@ export default function CheckoutPage() {
   };
 
   if (items.length === 0) {
-      navigate("/");
       return null;
   }
 
