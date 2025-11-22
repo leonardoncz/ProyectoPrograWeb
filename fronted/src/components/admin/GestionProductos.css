@@ -1,0 +1,143 @@
+/* Contenedor principal */
+.productos-container {
+  padding: 2rem;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background-color: #f4f5fa;
+  color: #1e1e2f; /* texto oscuro para legibilidad */
+}
+
+/* Título principal */
+.productos-container h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+  text-align: center;
+}
+
+/* Filtro y botón agregar */
+.productos-filtro {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.productos-filtro input {
+  flex: 1;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+}
+
+.btn-agregar {
+  padding: 0.5rem 1rem;
+  background-color: #6366f1; /* azul */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-agregar:hover {
+  background-color: #4f46e5;
+}
+
+/* Tabla de productos */
+.productos-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.productos-table th,
+.productos-table td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: center;
+  color: #1e1e2f; /* texto oscuro */
+}
+
+.productos-table th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+}
+
+/* Imagen de producto */
+.producto-img {
+  width: 40px; /* más pequeña */
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+/* Botones de acción dentro de la tabla */
+.productos-table button {
+  padding: 0.3rem 0.6rem;
+  background-color: #6366f1; /* azul */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.productos-table button:hover {
+  background-color: #4f46e5;
+}
+
+/* Paginación */
+.productos-paginacion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.productos-paginacion button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  border: 1px solid #6366f1;
+  background-color: #6366f1;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.productos-paginacion button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  background-color: #9ca3af;
+  border-color: #9ca3af;
+}
+
+.productos-paginacion button:hover:not(:disabled) {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+}
+
+/* Responsive: tabla y filtros */
+@media (max-width: 768px) {
+  .productos-filtro {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .productos-table th,
+  .productos-table td {
+    font-size: 0.85rem;
+    padding: 0.3rem;
+  }
+
+  .producto-img {
+    width: 30px;
+    height: 30px;
+  }
+}

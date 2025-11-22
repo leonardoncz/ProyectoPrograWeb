@@ -1,0 +1,129 @@
+/* src/components/usuario/PanelUsuario.css */
+/* Este archivo ahora contiene los estilos para PanelUsuario y DetalleOrden */
+
+.panel-container, .detalle-orden-container {
+  background-color: var(--color-background-card);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow-sm);
+  padding: 2rem;
+  margin: 1rem auto;
+}
+
+.panel-title, .detalle-orden-title {
+  margin-top: 0;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel-subtitle {
+  color: var(--color-text-muted);
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
+.panel-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.panel-table th, .panel-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.panel-table th {
+  color: var(--color-text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+/* Estilos de Estado */
+.status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-align: center;
+  display: inline-block;
+}
+
+.status-pendiente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.status-enviado {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+.status-cancelada {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.panel-vacio {
+  text-align: center;
+  padding: 3rem;
+}
+
+/* --- Detalle de Orden --- */
+.detalle-orden-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.detalle-orden-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1.5rem;
+  background-color: var(--color-background-light);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+}
+
+.detalle-info-item p {
+  margin: 0 0 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+.detalle-info-item strong {
+  font-size: 1.1rem;
+}
+
+.detalle-productos-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detalle-producto-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--color-background-light);
+  border-radius: var(--border-radius);
+}
+.detalle-producto-item img {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--border-radius);
+}
+.producto-info { flex-grow: 1; }
+.producto-info h4 { margin: 0; }
+
+.detalle-acciones {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
