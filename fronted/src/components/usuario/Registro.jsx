@@ -1,4 +1,4 @@
-// src/components/usuario/Registro.jsx
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from '../../context/AuthContext';
@@ -13,7 +13,7 @@ const Registro = () => {
   });
   const [error, setError] = useState("");
   const { registro } = useAuth();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); 
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });

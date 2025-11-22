@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Mensaje opcional de éxito (ej: después del registro)
+  
   const successMessage = location.state?.message;
 
   const handleSubmit = async (e) => {

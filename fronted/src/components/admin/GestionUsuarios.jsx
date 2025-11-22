@@ -10,7 +10,7 @@ const GestionUsuarios = () => {
   const [paginaActual, setPaginaActual] = useState(1);
   const ITEMS_POR_PAGINA = 10;
 
-  // CORRECCIÓN: Se filtra por 'pais' en lugar de 'apellido'
+ 
   const usuariosFiltrados = usuarios.filter(u =>
     u.nombre.toLowerCase().includes(filtro.toLowerCase()) ||
     (u.pais || '').toLowerCase().includes(filtro.toLowerCase()) || // Se usa (u.pais || '') por seguridad
@@ -30,7 +30,7 @@ const GestionUsuarios = () => {
       <div className="admin-filter-bar">
         <input
           type="text"
-          // CORRECCIÓN: El placeholder ahora incluye 'país'
+          
           placeholder="Filtrar por ID, nombre, email o país..."
           value={filtro}
           onChange={(e) => { setFiltro(e.target.value); setPaginaActual(1); }}
@@ -43,7 +43,7 @@ const GestionUsuarios = () => {
             <th>ID</th>
             <th>Nombre</th>
             <th>Email</th>
-            {/* CORRECCIÓN: La columna ahora es 'País' */}
+            
             <th>País</th>
             <th>Estado</th>
             <th>Acciones</th>
@@ -55,7 +55,7 @@ const GestionUsuarios = () => {
               <td>{usuario.id}</td>
               <td>{usuario.nombre}</td>
               <td>{usuario.email}</td>
-              {/* CORRECCIÓN: Se muestra el campo 'pais' */}
+             
               <td>{usuario.pais}</td>
               <td>{usuario.activo ? "Activo" : "Inactivo"}</td>
               <td className="admin-actions">

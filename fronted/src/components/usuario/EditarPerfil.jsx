@@ -1,4 +1,4 @@
-// src/components/usuario/EditarPerfil.jsx
+
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/AuthContext";
 import './EditarPerfil.css'; // Estilos específicos para este componente

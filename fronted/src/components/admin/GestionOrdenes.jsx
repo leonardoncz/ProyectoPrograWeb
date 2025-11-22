@@ -10,8 +10,7 @@ const GestionOrdenes = () => {
   const ITEMS_POR_PAGINA = 10;
 
   const ordenesFiltradas = ordenes.filter(o => {
-    // CORRECCIÓN: Se añade una guarda (o.productos || [])
-    // Esto asegura que si 'o.productos' es undefined, se usará un array vacío, evitando el error.
+    
     const mascotasTexto = (o.productos || []).map(p => `${p.name} ${p.breed}`).join(' ');
 
     return (

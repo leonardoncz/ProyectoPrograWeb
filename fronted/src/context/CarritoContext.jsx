@@ -1,14 +1,14 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
-// Crear el contexto
+
 export const CarritoContext = createContext();
 
-// Crear y exportar el hook personalizado
+
 export const useCarrito = () => {
   return useContext(CarritoContext);
 };
 
-// 3. Proveedor del contexto
+
 export function CarritoProvider({ children }) {
   const [items, setItems] = useState(() => {
     const guardado = localStorage.getItem('carritoItems');
