@@ -6,11 +6,13 @@ export const useOrdenes = () => {
   return useContext(OrdenesContext);
 };
 
+const URL = "https://testserverapi1-gchyazccfebqdwhq.centralus-01.azurewebsites.net";
+
 export const OrdenesProvider = ({ children }) => {
   const [ordenes, setOrdenes] = useState([]);
 
   const recargarOrdenes = () => {
-    fetch('http://localhost:3000/api/orders')
+    fetch(`${URL}/api/orders`)
       .then(res => res.json())
       .then(data => {
         if (Array.isArray(data)) setOrdenes(data);
@@ -25,7 +27,7 @@ export const OrdenesProvider = ({ children }) => {
 
   const agregarOrden = async (nuevaOrden) => {
     try {
-      const response = await fetch('http://localhost:3000/api/orders', {
+      const response = await fetch(`${URL}/api/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nuevaOrden)
@@ -50,7 +52,7 @@ export const OrdenesProvider = ({ children }) => {
 
   const cancelarOrden = async (ordenId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/orders/${ordenId}/cancel`, {
+      const response = await fetch(`${URL}/api/orders/${ordenId}/cancel`, {
         method: 'PUT'
       });
       if (response.ok) {

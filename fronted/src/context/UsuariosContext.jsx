@@ -11,7 +11,7 @@ export const UsuariosProvider = ({ children }) => {
 
   // Cargar usuarios desde la BD
   useEffect(() => {
-    fetch('http://localhost:3000/api/users')
+    fetch(`${URL}/api/users`)
         .then(res => res.json())
         .then(data => {
             if(Array.isArray(data)) setUsuarios(data);
@@ -25,7 +25,7 @@ export const UsuariosProvider = ({ children }) => {
   
   const toggleActivo = async (id) => {
     try {
-        const response = await fetch(`http://localhost:3000/api/users/${id}/toggle`, {
+        const response = await fetch(`${URL}/api/users/${id}/toggle`, {
             method: 'PUT'
         });
         

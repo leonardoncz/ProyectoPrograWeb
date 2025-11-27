@@ -6,13 +6,15 @@ export const useMascotas = () => {
   return useContext(MascotasContext);
 };
 
+const URL = "https://testserverapi1-gchyazccfebqdwhq.centralus-01.azurewebsites.net";
+
 const MascotasProvider = ({ children }) => {
   // 1. Iniciamos con un array vacío, ya no leemos de localStorage directamente
   const [mascotas, setMascotas] = useState([]);
 
   // 2. useEffect para cargar las mascotas desde el Backend al iniciar
   useEffect(() => {
-    fetch('http://localhost:3000/api/products')
+    fetch(`${URL}/api/products`)
       .then(response => response.json())
       .then(data => setMascotas(data))
       .catch(error => console.error("Error cargando mascotas:", error));
@@ -22,7 +24,7 @@ const MascotasProvider = ({ children }) => {
     try {
       // Nota: Como no estamos usando Multer para subir archivos,
       // asegúrate de que 'nuevaMascota.image' sea un string (URL) y no un objeto File por ahora.
-      const response = await fetch('http://localhost:3000/api/products', {
+      const response = await fetch(`${URL}/api/products`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(nuevaMascota)
@@ -41,7 +43,7 @@ const MascotasProvider = ({ children }) => {
 
   const actualizarMascota = async (mascotaActualizada) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/products/${mascotaActualizada.id}`, {
+      const response = await fetch(`${URL}/api/products/${mascotaActualizada.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(mascotaActualizada)
@@ -60,7 +62,7 @@ const MascotasProvider = ({ children }) => {
 
   const eliminarMascota = async (id) => {
     try {
-      await fetch(`http://localhost:3000/api/products/${id}`, {
+      await fetch(`${URL}/api/products/${id}`, {
         method: 'DELETE'
       });
       setMascotas(prev => prev.filter(m => m.id !== id));

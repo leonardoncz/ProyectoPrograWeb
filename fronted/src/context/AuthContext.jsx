@@ -6,6 +6,8 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
+const URL = "https://testserverapi1-gchyazccfebqdwhq.centralus-01.azurewebsites.net";
+
 const AuthProvider = ({ children }) => {
   const [usuario, setUsuario] = useState(null);
 
@@ -18,7 +20,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const response = await fetch('http://localhost:3000/api/auth/login', {
+      const response = await fetch(`${URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -40,7 +42,7 @@ const AuthProvider = ({ children }) => {
 
   const registro = async (datosUsuario) => {
     try {
-      const response = await fetch('http://localhost:3000/api/auth/register', {
+      const response = await fetch(`${URL}/api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datosUsuario)
@@ -68,7 +70,7 @@ const AuthProvider = ({ children }) => {
     if (!usuario) return;
 
     try {
-        const response = await fetch(`http://localhost:3000/api/auth/update/${usuario.id}`, {
+        const response = await fetch(`${URL}/api/auth/update/${usuario.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(datos)
@@ -91,7 +93,7 @@ const AuthProvider = ({ children }) => {
 
   const verificarEmailExistente = async (email) => {
     try {
-        const response = await fetch('http://localhost:3000/api/auth/check-email', {
+        const response = await fetch(`${URL}/api/auth/check-email`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
@@ -104,7 +106,7 @@ const AuthProvider = ({ children }) => {
   
   const recuperarContraseña = async (email, nuevaPassword) => {
     try {
-        const response = await fetch('http://localhost:3000/api/auth/reset-password', {
+        const response = await fetch(`${URL}/api/auth/reset-password`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, nuevaPassword })

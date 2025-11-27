@@ -3,12 +3,14 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 const CategoriasContext = createContext();
 export const useCategorias = () => useContext(CategoriasContext);
 
+const URL = "https://testserverapi1-gchyazccfebqdwhq.centralus-01.azurewebsites.net";
+
 const CategoriasProvider = ({ children }) => {
   const [categorias, setCategorias] = useState([]);
 
   // Cargar desde Backend
   useEffect(() => {
-    fetch('http://localhost:3000/api/categories')
+    fetch(`${URL}/api/categories`)
         .then(res => res.json())
         .then(data => {
             if(Array.isArray(data)) setCategorias(data);
@@ -20,7 +22,7 @@ const CategoriasProvider = ({ children }) => {
   // CRUD con Backend
   const agregarCategoria = async (nueva) => {
     try {
-        const res = await fetch('http://localhost:3000/api/categories', {
+        const res = await fetch(`${URL}/api/categories`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(nueva)
@@ -32,14 +34,14 @@ const CategoriasProvider = ({ children }) => {
 
   const eliminarCategoria = async (id) => {
     try {
-        await fetch(`http://localhost:3000/api/categories/${id}`, { method: 'DELETE' });
+        await fetch(`${URL}/api/categories/${id}`, { method: 'DELETE' });
         setCategorias(prev => prev.filter(cat => cat.id !== id));
     } catch (error) { console.error(error); }
   };
 
   const editarCategoria = async (id, datos) => {
      try {
-        const res = await fetch(`http://localhost:3000/api/categories/${id}`, {
+        const res = await fetch(`${URL}/api/categories/${id}`, {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(datos)
