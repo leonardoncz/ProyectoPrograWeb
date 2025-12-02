@@ -6,6 +6,8 @@ export const useUsuarios = () => {
   return useContext(UsuariosContext);
 };
 
+const URL = "https://testserverapi1-gchyazccfebqdwhq.centralus-01.azurewebsites.net";
+
 export const UsuariosProvider = ({ children }) => {
   const [usuarios, setUsuarios] = useState([]);
 
